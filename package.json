@@ -1,0 +1,37 @@
+{
+  "name": "mogocrudjs",
+  "version": "1.0.0",
+  "description": "https://github.com/pedrorobsonleao/MongoCrudJs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "async": "~0.2.8",
+    "cors": "^2.8.1",
+    "express": "~4.14.0",
+    "compression": "~1.6.2",
+    "body-parser": "~1.9.2",
+    "debug": "~0.7.2",
+    "morgan": "~1.7.0",
+    "mongodb": "~2.2.19"
+  },
+  "engines": {
+    "node": "4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pedrorobsonleao/MongoCrudJs"
+  },
+  "keywords": [
+    "node",
+    "nodejs",
+    "heroku",
+    "express",
+    "rest",
+    "restful",
+    "mongodb"
+  ],
+  "author": "Pedro Robson leao <pedro.leao@gmail.com> (http://about.me/pedrorobsonleao)",
+  "license": "gpl 3.0"
+}
