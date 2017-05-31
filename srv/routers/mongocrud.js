@@ -1,4 +1,4 @@
-var util = require('util') // Used to Inspect ibjects
+var util = require('util') // Used to Inspect objects
 var express = require('express'); // Used to make a express module
 var db = require('../../srv/db/mongo'); // A database pool link
 
@@ -43,7 +43,9 @@ router.post('/', function(req, res) { // POST Method
 });
 
 router.get('/:_id', function(req,res) { // GET Method
-    req.collection.findOne(req.params,function(err,docs) { // find a uniq ID
+    req.collection.findOne(
+        {_id: BSON.ObjectID(req.params._id)},
+        function(err,docs) { // find a uniq ID
         if(err) {
             debug(util.inspect(err, false, null));
             res.status(500).send(err);
