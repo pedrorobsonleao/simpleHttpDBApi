@@ -21,7 +21,7 @@ $ tree
 
 This code is a sample **CRUD**, restful MongoDB implementation.
 
-Use this code to learning about **NodeJs**, **MongoDB**, **RestFull** api services.
+Use this code to learning about **NodeJs**, **MongoDB**, **RestFul** api services.
 
 * **to run**
 
