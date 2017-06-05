@@ -5,6 +5,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var compression = require('compression');
 
+var debug = require('debug')('server'); //debug - to use set im prompt: DEBUG=crud node ./bin/wwww
+
 var app = express();
 
 app.use(cors());
@@ -38,8 +40,8 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
+        res.status(err.status || 500)
+        .send({
             message: err.message,
             error: err
         });
@@ -49,8 +51,8 @@ if (app.get('env') === 'development') {
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
+    res.status(err.status || 500)
+    .send({
         message: err.message,
         error: {}
     });

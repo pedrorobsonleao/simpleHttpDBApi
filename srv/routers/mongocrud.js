@@ -13,6 +13,7 @@ router.use(function(req,res,next) {
         
     debug('get connection:' + name);
     req.collection = db.get().collection(name); // get collection
+    debug(util.inspect(req.body,false,null));
     next(); // go to next event
 });
 
