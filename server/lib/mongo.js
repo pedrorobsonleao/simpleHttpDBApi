@@ -1,5 +1,5 @@
 var MongoClient = require('mongodb').MongoClient;
-// db link control
+
 var state = {
   db: null,
 };

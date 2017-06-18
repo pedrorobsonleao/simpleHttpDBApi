@@ -2,9 +2,9 @@
   "name": "mogocrudjs",
   "version": "1.0.0",
   "description": "https://github.com/pedrorobsonleao/MongoCrudJs",
-  "main": "server.js",
+  "main": "./server/bin/httpd",
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "./server/bin/httpd"
   },
   "dependencies": {
     "async": "~0.2.8",

@@ -1,0 +1,47 @@
+#!/usr/bin/env node
+
+var debug = require('debug')('httpd');
+var config = require('../etc/config');
+var app = require('../lib/server');
+
+var listen = function(port) {
+  app.set('port', port);
+  app.listen(app.get('port'), function() {
+    console.log('Node app is running at localhost:' + port);
+  });
+};
+
+var main = function(args) {
+
+  for( var i in args) {
+    if(args[i] === '--config') {
+      i++;
+      debug('load config:' + args[i]);
+      config = require(args[i]);
+    }
+  }
+
+  debug(config);
+
+  if(config.DB.uri) {
+
+    var db = require(config.DB.module);
+    
+    debug('connect database:', config.DB.uri);
+
+    db.connect(config.DB.uri, function(error) {
+      if(error) {
+        console.error('Unable to connect to DataBase [' + error + ']');
+        process.exit(1);
+      } else {
+        listen(config.PORT || 80);
+      }
+    });
+  } else {
+        listen(config.PORT || 80);
+  }
+};
+
+main(process.argv.filter(function(arg, idx) {
+    return (idx > 1);
+}));
