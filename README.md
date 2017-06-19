@@ -24,7 +24,7 @@ $ tree
 
 The code is a *HTTPD* configurable server sample with a **CRUD** **MongoDB** api **REST** implemented.
 
-Use this code to learning about **NodeJs**, **HTTP*** server, **MongoDB**, **RestFul** api services.
+Use this code to learning about **NodeJs**, **HTTP** server, **MongoDB**, **RestFul** api services.
 
 This code is write to run in **HEROKU**, https://www.heroku.com/ environment.
 
