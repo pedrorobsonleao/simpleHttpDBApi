@@ -1,7 +1,7 @@
 {
-  "name": "mogocrudjs",
+  "name": "simpleHttpServerMongoCrudJs",
   "version": "1.0.0",
-  "description": "https://github.com/pedrorobsonleao/MongoCrudJs",
+  "description": "https://github.com/pedrorobsonleao/simpleHttpServerMongoCrudJs.git",
   "main": "./server/bin/httpd",
   "scripts": {
     "start": "./server/bin/httpd"

@@ -1,6 +1,6 @@
 var util = require('util') // Used to Inspect objects
 var express = require('express'); // Used to make a express module
-var db = require('../../srv/db/mongo'); // A database pool link
+var db = require('../lib/mongo'); // A database pool link
 
 var router = express.Router();
 var debug = require('debug')('crud'); //debug - to use set im prompt: DEBUG=crud node ./bin/wwww

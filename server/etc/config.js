@@ -11,8 +11,8 @@ exports.DB = {
 
 // URL Bind
 exports.URL = [
-    {uri: '/crud1',      module: '../modules/regatta'},
-    {uri: '/crud2',     module: '../modules/regatta'},
+    {uri: '/crud1', module: '../modules/mongocrud'},
+    {uri: '/crud2', module: '../modules/mongocrud'}
 ];
 
 // Static html bases
@@ -21,4 +21,4 @@ exports.HTDOCS = [
 ];
 
 // enable cross site
-exports.hasCORS = false;
+exports.hasCORS = true;
