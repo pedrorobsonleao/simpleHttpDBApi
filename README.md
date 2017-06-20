@@ -40,7 +40,7 @@ $ export PORT=9090
     $ npm start
     ```
 * **service**
-    * **POST** - create
+    * POST - ***Create***
         ```
         /collection
         ```
@@ -50,7 +50,7 @@ $ export PORT=9090
             ```
         Save in database a document posted in *BODY*.
 
-    * **GET**
+    * GET - ***Read***
         ```
         /collection
         ```
@@ -68,7 +68,7 @@ $ export PORT=9090
             ```
         Read a one object from database by ID.
 
-    * **PUT**
+    * PUT - ***Update***
         ```
         /collection/:_id
         ```
@@ -78,7 +78,7 @@ $ export PORT=9090
             ```
         Update a object in database.
 
-    * **DELETE**
+    * DELETE - ***Delete***
         ```
         /collection/:_id
         ```
