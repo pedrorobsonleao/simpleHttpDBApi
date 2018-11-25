@@ -1,3 +1,4 @@
 node_modules/
-npm-debugi*.log
+*.log
 .env
+*.lock
