@@ -11,7 +11,7 @@ exports.DB = {
 
 // URL Bind
 exports.URL = [
-    {uri: '/reviews', module: '../modules/mongocrud'},
+    {uri: '/crud', module: '../modules/mongocrud'},
     {uri: '/crud2', module: '../modules/mongocrud'}
 ];
 
