@@ -60,23 +60,23 @@ router.get('/', function (req, res) { // GET Method
             if (response.page < response.pages) {
                 response.next = remakeQuery(req, (response.page + 1));
             }
+
+            req.collection.find({}) // find all data
+                .skip(skips)
+                .limit(req.query.size)
+                .toArray(function (err, docs) { // convert all data to array
+                    if (err) {
+                        debug(util.inspect(err, false, null));
+                        res.status(500).send(err);
+                    } else {
+                        response.itens = docs;
+                        debug(util.inspect(response, false, null));
+                        res.json(response);
+                        res.end();
+                    }
+                });
         }
     });
-
-    req.collection.find({}) // find all data
-        .skip(skips)
-        .limit(req.query.size)
-        .toArray(function (err, docs) { // convert all data to array
-            if (err) {
-                debug(util.inspect(err, false, null));
-                res.status(500).send(err);
-            } else {
-                response.itens = docs;
-                debug(util.inspect(response, false, null));
-                res.json(response);
-                res.end();
-            }
-        });
 });
 
 router.post('/', function (req, res) { // POST Method
