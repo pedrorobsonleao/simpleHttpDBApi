@@ -43,8 +43,8 @@ $ export PORT=9090
 ```
 # <a name='run'></a>[run](#home)
 ```
-$ npm install
-$ npm start
+$ yarn install
+$ yarn start
 ```
 # <a name='services'></a>[services](#home)
 ## <a name='create'></a>[create](#home) - (method POST)
@@ -65,7 +65,19 @@ Save in database a document posted in *BODY*.
 ```
 $ curl -X GET http://localhost:9090/crud
 ```
-Read a object from database.
+Read a object paginated from database.
+```
+{
+    "page":?,
+    "pages":??,
+    "total":???,
+    "next":"http://localhost:9090/crud?page=2",
+    "data":[
+        ...
+    ]
+}
+```
+
 ```
 /collection/:_id
 ```

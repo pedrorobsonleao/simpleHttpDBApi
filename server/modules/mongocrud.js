@@ -18,14 +18,41 @@ router.use(function(req,res,next) {
 });
 
 router.get('/', function(req,res) { // GET Method
+    var cursor =  req.collection.find({});
+
+    var count = 0;
+
+    var pageSize =  50;
+    var pageNum = (req.query.page)?parseInt(req.query.page):1;
+
+    var skips =  pageSize * (pageNum - 1);
+
+    var response = {
+        page: pageNum
+    };
+    
+    cursor.count(function(error, ct) {
+        if(!error) {
+            response.pages = Math.ceil(ct/pageSize);
+            response.total = ct;
+
+            if( response.page < response.pages ) {
+                response.next = req.protocol + '://' + req.get('host') + req.baseUrl + "?page=" + (response.page + 1);
+            }
+        }
+    });
+
     req.collection.find({}) // find all data
+    .skip(skips)
+    .limit(pageSize)
     .toArray(function(err,docs) { // convert all data to array
         if(err) {
             debug(util.inspect(err, false, null));
             res.status(500).send(err);
         } else {
-            debug(util.inspect(docs, false, null));
-            res.json(docs);
+            response.data = docs;
+            debug(util.inspect(response, false, null));
+            res.json(response);
             res.end();
         }
     });
