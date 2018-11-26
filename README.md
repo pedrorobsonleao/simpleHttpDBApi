@@ -68,11 +68,12 @@ $ curl -X GET http://localhost:9090/crud
 Read a object paginated from database.
 ```
 {
-    "page":?,
-    "pages":??,
-    "total":???,
-    "next":"http://localhost:9090/crud?page=2",
-    "data":[
+    "page":2,
+    "pages":10,
+    "total":100,
+    "prev":"http://localhost:9090/crud?page=1",
+    "next":"http://localhost:9090/crud?page=3",
+    "itens":[
         ...
     ]
 }
