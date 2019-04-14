@@ -1,5 +1,7 @@
+/* jshint esversion:8 */
+
 // String Normalizer
-exports.normalize = function() {
+exports.normalize = () => {
     return this
         .replace(/[áàãâä]/g, 'a')
         .replace(/[éèẽêë]/g, 'e')

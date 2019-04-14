@@ -1,13 +1,15 @@
-var util = require('util') // Used to Inspect objects
-var express = require('express'); // Used to make a express module
-var db = require('../lib/mongo'); // A database pool link
+/* jshint esversion:8 */
 
-var router = express.Router();
-var debug = require('debug')('crud'); //debug - to use set im prompt: DEBUG=crud node ./bin/wwww
+const util = require('util'); // Used to Inspect objects
+const express = require('express'); // Used to make a express module
+const db = require('../lib/mongo'); // A database pool link
 
-var BSON = require('mongodb'); // BSON is to make a BSON.ObjectID()
+const router = express.Router();
+const debug = require('debug')('crud'); //debug - to use set im prompt: DEBUG=crud node ./bin/wwww
 
-router.use(function (req, res, next) {
+const BSON = require('mongodb'); // BSON is to make a BSON.ObjectID()
+
+router.use((req, res, next) => {
     // get collection name from url request
     var name = req.originalUrl.replace(/^\/([a-zA-Z0-9_]+).*/, '$1'); // get the first name in request url to make a collection
 
@@ -17,7 +19,7 @@ router.use(function (req, res, next) {
     next(); // go to next event
 });
 
-var remakeQuery = function (req, page) {
+const remakeQuery = (req, page) => {
     var query = [];
     for (var key in req.query) {
         var value = req.query[key];
@@ -35,7 +37,7 @@ var remakeQuery = function (req, page) {
     return response;
 };
 
-router.get('/', function (req, res) { // GET Method
+router.get('/', (req, res) => { // GET Method
     var cursor = req.collection.find({});
 
     var count = 0;
@@ -49,7 +51,7 @@ router.get('/', function (req, res) { // GET Method
         page: req.query.page
     };
 
-    cursor.count(function (error, ct) {
+    cursor.count((error, ct) => {
         if (!error) {
             response.pages = Math.ceil(ct / req.query.size);
             response.total = ct;
@@ -64,7 +66,7 @@ router.get('/', function (req, res) { // GET Method
             req.collection.find({}) // find all data
                 .skip(skips)
                 .limit(req.query.size)
-                .toArray(function (err, docs) { // convert all data to array
+                .toArray((err, docs) => { // convert all data to array
                     if (err) {
                         debug(util.inspect(err, false, null));
                         res.status(500).send(err);
@@ -79,10 +81,10 @@ router.get('/', function (req, res) { // GET Method
     });
 });
 
-router.post('/', function (req, res) { // POST Method
+router.post('/', (req, res) => { // POST Method
     req.collection.insert(req.body, {
         safe: true
-    }, function (err, docs) { // insert data
+    }, (err, docs) => { // insert data
         if (err) {
             debug(util.inspect(err, false, null));
             res.status(500).send(err);
@@ -93,11 +95,11 @@ router.post('/', function (req, res) { // POST Method
     });
 });
 
-router.get('/:_id', function (req, res) { // GET Method
+router.get('/:_id', (req, res) => { // GET Method
     req.collection.findOne({
-            _id: BSON.ObjectID(req.params._id)
-        },
-        function (err, docs) { // find a uniq ID
+        _id: BSON.ObjectID(req.params._id)
+    },
+        (err, docs) => { // find a uniq ID
             if (err) {
                 debug(util.inspect(err, false, null));
                 res.status(500).send(err);
@@ -108,7 +110,7 @@ router.get('/:_id', function (req, res) { // GET Method
         });
 });
 
-router.put('/:_id', function (req, res) { // PUT Method 
+router.put('/:_id', (req, res) => { // PUT Method 
     req.collection.update( // Update a document in database
         {
             _id: BSON.ObjectID(req.params._id)
@@ -117,7 +119,7 @@ router.put('/:_id', function (req, res) { // PUT Method
         }, {
             sage: true
         },
-        function (err, docs) {
+        (err, docs) => {
             if (err) {
                 debug(util.inspect(err, false, null));
                 res.status(500).send(err);
@@ -128,12 +130,12 @@ router.put('/:_id', function (req, res) { // PUT Method
         });
 });
 
-router.delete('/:_id', function (req, res) { // DELETE Method
+router.delete('/:_id', (req, res) => { // DELETE Method
     req.collection.remove( // remove document
         {
             _id: BSON.ObjectID(req.params._id)
         },
-        function (err, docs) {
+        (err, docs) => {
             if (err) {
                 debug(util.inspect(err, false, null));
                 res.status(500).send(err);

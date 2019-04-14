@@ -1,26 +1,24 @@
-var MongoClient = require('mongodb').MongoClient;
+/* jshint esversion:8 */
 
-var state = {
-  db: null,
-};
+const mongo = require('mongodb').MongoClient;
 
-exports.connect = function(url, done) {
+const state = { db: null };
+
+exports.connect = (url, done) => {
   if (state.db) return done();
 
-  MongoClient.connect(url, function(err, db) {
+  mongo.connect(url, (err, db) => {
     if (err) return done(err);
     state.db = db;
     done();
   });
 };
 
-exports.get = function() {
-  return state.db;
-};
+exports.get = () => { return state.db; };
 
-exports.close = function(done) {
+exports.close = (done) => {
   if (state.db) {
-    state.db.close(function(err, result) {
+    state.db.close((err, result) => {
       state.db = null;
       state.mode = null;
       done(err);
