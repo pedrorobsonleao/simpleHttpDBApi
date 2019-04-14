@@ -1,5 +1,5 @@
 {
-  "name": "simpleHttpServerMongoCrudJs",
+  "name": "simple_http_server_mongo_crud_js",
   "version": "1.0.0",
   "description": "https://github.com/pedrorobsonleao/simpleHttpServerMongoCrudJs.git",
   "main": "./server/bin/httpd",
