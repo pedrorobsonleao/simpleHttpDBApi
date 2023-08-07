@@ -7,7 +7,7 @@
     "start": "./server/bin/httpd"
   },
   "dependencies": {
-    "async": "~0.2.8",
+    "async": "~3.2.2",
     "body-parser": "~1.18.2",
     "compression": "^1.7.3",
     "cors": "^2.8.1",
