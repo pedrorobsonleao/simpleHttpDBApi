@@ -9,7 +9,7 @@ const debug = require('debug')('crud'); //debug - to use set im prompt: DEBUG=cr
 
 router.use((req, res, next) => {
     // get collection name from url request
-    var name = req.originalUrl.replace(/^\/([a-zA-Z0-9_]+).*/, '$1'); // get the first name in request url to make a collection
+    let name = req.originalUrl.replace(/^\/([a-zA-Z0-9_]+).*/, '$1'); // get the first name in request url to make a collection
 
     debug('get connection:' + name);
     req.db = db.get(); // db connection
@@ -42,16 +42,16 @@ SELECT
 const _selectCount = 'SELECT count(1) total from vehicle';
 
 const remakeQuery = (req, page) => {
-    var query = [];
-    for (var key in req.query) {
-        var value = req.query[key];
+    let query = [];
+    for (let key in req.query) {
+        let value = req.query[key];
         if (key === "page" && page) {
             value = page;
         }
         query.push(key + "=" + value);
     }
 
-    var response = req.protocol + '://' + req.get('host') + req.baseUrl;
+    let response = req.protocol + '://' + req.get('host') + req.baseUrl;
     if (query.length) {
         response += "?";
         response += query.join("&");
