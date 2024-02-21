@@ -9,7 +9,7 @@ const debug = require('debug')('crud'); //debug - to use set im prompt: DEBUG=cr
 
 router.use((req, res, next) => {
     // get collection name from url request
-    let name = req.originalUrl.replace(/^\/([a-zA-Z0-9_]+).*/, '$1'); // get the first name in request url to make a collection
+    let name = req.originalUrl.replace(/^\/(\w+).*/, '$1'); // get the first name in request url to make a collection
 
     debug('get connection:' + name);
     req.db = db.get(); // db connection
