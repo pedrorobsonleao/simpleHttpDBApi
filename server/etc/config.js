@@ -1,7 +1,5 @@
 /* jshint esversion: 8 */
 
-// var exports = module.exports = {};
-
 // Port to http server bind
 exports.DEFAULT_PORT = 8080;
 exports.PORT = process.env.PORT;
