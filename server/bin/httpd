@@ -6,6 +6,8 @@ const _debug = require('debug')('httpd');
 const _config = require('../etc/config');
 const _app = require('../lib/server');
 
+const { ConnectionString } = require('connection-string');
+
 let listen = (port) => {
   _app.set('port', port);
   _app.listen(_app.get('port'), () => {
@@ -29,7 +31,8 @@ let main = (args) => {
 
   if (config.DB.uri) {
 
-    let db = require(config.DB.module);
+    const obj = new ConnectionString(config.DB.uri);
+    const db = require(`../lib/${obj.protocol.replace("db","")}`);
 
     _debug('connect database:', config.DB.uri);
 

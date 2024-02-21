@@ -1,6 +1,6 @@
 /* jshint esversion: 8 */
 
-let exports = module.exports = {};
+// var exports = module.exports = {};
 
 // Port to http server bind
 exports.DEFAULT_PORT = 8080;
@@ -8,10 +8,7 @@ exports.PORT = process.env.PORT;
 
 // Database
 exports.DB = {
-    // uri: process.env.MONGODB_URI,
-    // module: '../lib/mongo'
-    uri: process.env.MYSQL_URI,
-    module: '../lib/mysql'
+    uri: process.env.DB_URI
 };
 
 // URL Bind
