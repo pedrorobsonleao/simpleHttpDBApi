@@ -1,0 +1,14 @@
+FROM node:21-alpine
+
+WORKDIR /app
+
+COPY . /app
+
+RUN adduser -D app && \
+    yarn install
+
+USER app
+
+CMD yarn start
+
+EXPOSE 8080
