@@ -1,7 +1,7 @@
 /* jshint esversion: 8 */
 
 // Port to http server bind
-exports.DEFAULT_PORT = 8080;
+exports.DEFAULT_PORT = 80;
 exports.PORT = process.env.PORT;
 
 // Database
