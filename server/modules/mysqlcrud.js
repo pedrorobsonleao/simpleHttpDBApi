@@ -59,6 +59,19 @@ const remakeQuery = (req, page) => {
     return response;
 };
 
+router.get('/brands', (req, res) => {
+    req.db.query('SELECT name FROM brand ORDER BY name', (err, rows, fields) => {
+        if (err) {
+            debug(util.inspect(err, false, null));
+            res.status(500).send(err);
+        } else {
+            debug(util.inspect(rows, false, null));
+            if (rows.length === 0) res.status(404).send(rows)
+            else res.send(rows);
+        }
+    });
+});
+
 router.get('/:license', (req, res) => {
     req.db.query(`
 ${_selectQuery}
@@ -93,7 +106,7 @@ router.get('/', (req, res) => {
             // count fields
 
             const qtd = rows[0].total;
-            
+
             if (err) res.status(500).send(err);
 
             response.pages = Math.ceil(qtd / req.query.size);
@@ -106,9 +119,27 @@ router.get('/', (req, res) => {
                 response.next = remakeQuery(req, (response.page + 1));
             }
 
+            let order = "desc";
+
+            let filter = "";
+            
+            Object
+                .entries(req.query)
+                .filter(a => !a[0].match(/^(size|page|)$/))
+                .forEach(o => {
+                    switch (o[0]) {
+                        case 'order': order = o[1]; break;
+                        case 'name': filter += (o[1].length)?`and brand.${o[0]} = '${o[1]}'
+                        `:""; break;
+                        default: filter += `and vehicle.${o[0]} > '${o[1]}'
+                        `; break;
+                    }
+                });
+
             req.db.query(`
             ${_selectQuery}
-            order  by id
+            ${filter}
+            order  by vehicle.price ${order}
             limit  ${req.query.size}
             offset ${skips}
                 `, (err, rows, fields) => {
