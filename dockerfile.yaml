@@ -1,0 +1,12 @@
+FROM node:21-alpine
+
+WORKDIR /app
+
+COPY . /app
+
+RUN adduser -D app && \
+    yarn install
+
+USER app
+
+ENTRYPOINT [ "yarn", "start" ]

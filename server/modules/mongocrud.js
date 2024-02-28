@@ -11,7 +11,7 @@ const BSON = require('mongodb'); // BSON is to make a BSON.ObjectID()
 
 router.use((req, res, next) => {
     // get collection name from url request
-    var name = req.originalUrl.replace(/^\/([a-zA-Z0-9_]+).*/, '$1'); // get the first name in request url to make a collection
+    let name = req.originalUrl.replace(/^\/(\w+).*/, '$1'); // get the first name in request url to make a collection
 
     debug('get connection:' + name);
     req.collection = db.get().collection(name); // get collection
@@ -20,16 +20,16 @@ router.use((req, res, next) => {
 });
 
 const remakeQuery = (req, page) => {
-    var query = [];
-    for (var key in req.query) {
-        var value = req.query[key];
+    let query = [];
+    for (let key in req.query) {
+        let value = req.query[key];
         if (key === "page" && page) {
             value = page;
         }
         query.push(key + "=" + value);
     }
 
-    var response = req.protocol + '://' + req.get('host') + req.baseUrl;
+    let response = req.protocol + '://' + req.get('host') + req.baseUrl;
     if (query.length) {
         response += "?";
         response += query.join("&");
@@ -38,16 +38,16 @@ const remakeQuery = (req, page) => {
 };
 
 router.get('/', (req, res) => { // GET Method
-    var cursor = req.collection.find({});
+    let cursor = req.collection.find({});
 
-    var count = 0;
+    let count = 0;
 
     req.query.page = (req.query.page) ? parseInt(req.query.page) : 1;
     req.query.size = (req.query.size) ? parseInt(req.query.size) : 20;
 
-    var skips = req.query.size * (req.query.page - 1);
+    let skips = req.query.size * (req.query.page - 1);
 
-    var response = {
+    let response = {
         page: req.query.page
     };
 

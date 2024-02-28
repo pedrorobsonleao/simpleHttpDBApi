@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 app.use(compression());
 
 config.HTDOCS.forEach((htdocs) => {
-    var _path = path.join(__dirname, htdocs.dir);
+    let _path = path.join(__dirname, htdocs.dir);
     debug('bind static uri:' + htdocs.uri + '\t dir:' + _path);
     app.use(htdocs.uri, express.static(_path));
 });
@@ -45,7 +45,7 @@ config.URL.forEach((url) => {
 
 /// catch 404 and forwarding to error handler
 app.use( (req, res, next) => {
-    var err = new Error('Not Found');
+    let err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
